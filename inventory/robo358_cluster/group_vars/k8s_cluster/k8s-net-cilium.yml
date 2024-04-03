@@ -2,11 +2,11 @@
 cilium_version: "v1.13.4"
 
 # Log-level
-# cilium_debug: false
+cilium_debug: false
 
 # cilium_mtu: ""
-# cilium_enable_ipv4: true
-# cilium_enable_ipv6: false
+cilium_enable_ipv4: true
+cilium_enable_ipv6: true
 
 # Cilium agent health port
 # cilium_agent_health_port: "9879"
@@ -140,7 +140,7 @@ cilium_kube_proxy_replacement: strict
 
 # Hubble
 ### Enable Hubble without install
-# cilium_enable_hubble: false
+cilium_enable_hubble: true
 ### Enable Hubble Metrics
 # cilium_enable_hubble_metrics: false
 ### if cilium_enable_hubble_metrics: true
@@ -152,9 +152,9 @@ cilium_kube_proxy_replacement: strict
 # - icmp
 # - http
 ### Enable Hubble install
-# cilium_hubble_install: false
+cilium_hubble_install: true
 ### Enable auto generate certs if cilium_hubble_install: true
-# cilium_hubble_tls_generate: false
+cilium_hubble_tls_generate: true
 
 # IP address management mode for v1.9+.
 # https://docs.cilium.io/en/v1.9/concepts/networking/ipam/
@@ -169,8 +169,7 @@ cilium_ipam_mode: cluster-pool
 
 # cilium_agent_extra_env_vars: []
 
-# cilium_operator_replicas: 2
-
+cilium_operator_replicas: 3
 # The address at which the cillium operator bind health check api
 # cilium_operator_api_serve_addr: "127.0.0.1:9234"
 
