@@ -9,7 +9,6 @@ bin_dir: /usr/local/bin
 ## but don't know about that address themselves.
 # access_ip: 1.1.1.1
 
-
 ## External LB example config
 ## apiserver_loadbalancer_domain_name: "elb.some.domain"
 # loadbalancer_apiserver:
@@ -92,7 +91,8 @@ no_proxy_exclude_workers: false
 # kube_read_only_port: 10255
 
 ## Set true to download and cache container
-# download_container: true
+download_container: false
+skip_downloads: false
 
 ## Deploy container engine
 # Set false if you want to deploy container engine manually.
