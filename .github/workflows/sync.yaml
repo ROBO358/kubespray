@@ -1,0 +1,34 @@
+name: Sync Fork
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  sync_fork:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Remote add upstream
+        run: |
+          git remote add upstream https://github.com/kubernetes-sigs/kubespray.git
+
+      - name: Sync
+        run: |
+          git fetch upstream --tags
+          git fetch upstream
+          for branch in `git branch -r | grep -v '\->' | sed 's,\x1B\[[0-9;]*[a-zA-Z],,g' | grep "upstream/"`;do
+            local_branch=${branch#upstream/}
+            if ! git show-ref --verify --quiet refs/heads/$local_branch; then
+              git branch --track $local_branch $branch
+            else
+              git branch -u $branch $local_branch
+            fi
+          done
+          git push --all origin
+          git push --tags origin
