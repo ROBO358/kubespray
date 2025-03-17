@@ -23,10 +23,6 @@ kube_apiserver_etcd_compaction_interval: "5m0s"
 # in the request is actually present in etcd.
 kube_apiserver_service_account_lookup: true
 
-kube_etcd_cacert_file: ca.pem
-kube_etcd_cert_file: node-{{ inventory_hostname }}.pem
-kube_etcd_key_file: node-{{ inventory_hostname }}-key.pem
-
 # Associated interfaces must be reachable by the rest of the cluster, and by
 # CLI/web clients.
 kube_controller_manager_bind_address: "::"
@@ -252,3 +248,7 @@ kubeadm_use_file_discovery: "{{ remove_anonymous_access }}"
 # can be one of RSA-2048(default), RSA-3072, RSA-4096, ECDSA-P256
 # ref: https://kubernetes.io/docs/reference/config-api/kubeadm-config.v1beta4/#kubeadm-k8s-io-v1beta4-ClusterConfiguration
 kube_asymmetric_encryption_algorithm: "RSA-2048"
+
+kube_etcd_cacert_file: "kube-client-ca.pem"
+kube_etcd_cert_file: "kube-client-cert.pem"
+kube_etcd_key_file: "kube-client-key.pem"
