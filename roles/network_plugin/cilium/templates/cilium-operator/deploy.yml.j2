@@ -84,7 +84,7 @@ spec:
                   name: cilium-aws
                   key: AWS_DEFAULT_REGION
                   optional: true
-{% if cilium_kube_proxy_replacement == 'strict' %}
+{% if (cilium_kube_proxy_replacement == 'strict') or (cilium_kube_proxy_replacement | bool) or (cilium_kube_proxy_replacement | string | lower == 'true') %}
             - name: KUBERNETES_SERVICE_HOST
               value: "{{ kube_apiserver_global_endpoint | urlsplit('hostname') }}"
             - name: KUBERNETES_SERVICE_PORT
@@ -146,7 +146,7 @@ spec:
               matchLabels:
                 io.cilium/app: operator
       tolerations:
-        - operator: Exists
+        {{ cilium_operator_tolerations | list | to_nice_yaml(indent=2) | indent(8) }}
       volumes:
         - name: cilium-config-path
           configMap:
